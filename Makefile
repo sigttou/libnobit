@@ -5,15 +5,16 @@ TARGET = libnobit.so
 
 SRC = nobit.c
 OBJ = $(SRC:.c=.o)
+INC = ./include
 
 .PHONY: all
 all: ${TARGET}
 
 $(TARGET): $(OBJ)
-	$(CC) ${LDFLAGS} -o $@ $^
+	$(CC) -I$(INC) ${LDFLAGS} -o $@ $^
 
 $(SRC:.c=.d):%.d:%.c
-	$(CC) $(CFLAGS) -MM $< >$@
+	$(CC) -I$(INC) $(CFLAGS) -MM $< >$@
 
 include $(SRC:.c=.d)
 
