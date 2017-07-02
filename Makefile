@@ -1,20 +1,19 @@
 CC = gcc
-CFLAGS = -fPIC -Wall -Wextra -O2 -g
+CFLAGS = -fPIC -Wall -Wextra -I./include -O2 -g -Wno-missing-braces
 LDFLAGS = -shared
 TARGET = libnobit.so
 
 SRC = nobit.c
 OBJ = $(SRC:.c=.o)
-INC = ./include
 
 .PHONY: all
 all: ${TARGET}
 
 $(TARGET): $(OBJ)
-	$(CC) -I$(INC) ${LDFLAGS} -o $@ $^
+	$(CC) ${LDFLAGS} -o $@ $^
 
 $(SRC:.c=.d):%.d:%.c
-	$(CC) -I$(INC) $(CFLAGS) -MM $< >$@
+	$(CC) $(CFLAGS) -MM $< >$@
 
 include $(SRC:.c=.d)
 
