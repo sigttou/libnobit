@@ -7,10 +7,10 @@ int main(void)
   FILE* f = fopen("not.bin", "w");
   for(c = 0; c < UCHAR_MAX; c++)
   {
-    r = !c;
+    r = ~c;
     fwrite(&r, 1, 1, f);
   }
-  r = !c;
+  r = ~c;
   fwrite(&r, 1, 1, f);
   return 0;
 }
